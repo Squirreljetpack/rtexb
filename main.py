@@ -32,28 +32,26 @@ def main():
     subreddit = reddit.subreddit(subreddits)
     for comment in subreddit.stream.comments():
         if hasattr(comment,"body"):
-            process_comment(comment)
+            for reply in comment.replies:
+                if hasattr(reply,"author"):
+                    if reply.author == username:
+                        continue
+                if (hasattr(comment,"author")):
+                    if (comment.author != username): process_comment(comment)
 
 def process_comment(comment):
-    for reply in comment.replies:
-        if hasattr(reply,"author"):
-            if reply.author == username:
-                break
-    else:
-        if (hasattr(comment,"author")):
-            if (comment.author != username):
-                found = re.findall(re.compile(r"\$\$.*?\$\$"),comment.body)
-                if found:
-                    for i in range(len(found)):
-                        found[i] = quote(found[i].replace('\\\\', '\\'), safe='/')
-                    l=[f"[{i}](http://{url}/mathjax/{s})" for i, s in enumerate(found, 1)]
-                    s="I've rendered your latex: "+' '.join(l)
-                    comment.reply(s)
-                    print(comment.author)
-                    print(comment.body)
-                    print(s)
-                    print("###################", flush=True)
-                    time.sleep(120)
+    found = re.findall(re.compile(r"\$\$.*?\$\$"),comment.body)
+    if found:
+        for i in range(len(found)):
+            found[i] = quote(found[i].replace('\\\\', '\\'), safe='/')
+        l=[f"[{i}](http://{url}/mathjax/{s})" for i, s in enumerate(found, 1)]
+        s="I've rendered your latex: "+' '.join(l)
+        comment.reply(s)
+        print(comment.author)
+        print(comment.body)
+        print(s)
+        print("###################", flush=True)
+        time.sleep(120)
         
 
 if __name__ == "__main__":
