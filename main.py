@@ -4,6 +4,10 @@ from urllib.parse import quote
 import time
 from codecs import unicode_escape_decode
 import os
+from dotenv import load_dotenv
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir,'.env'))
 
 user_agent=os.environ.get('PRAW_USER_AGENT'),
 client_id=os.environ.get('PRAW_CLIENT_ID'),
