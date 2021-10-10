@@ -44,7 +44,7 @@ def main():
                         process_comment(comment)
 
 def process_comment(comment):
-    found = re.findall(re.compile(r"\$\$.*?\$\$"),comment.body)
+    found = re.findall(re.compile(r"\$\$.*?\$\$",flags=re.DOTALL),comment.body)
     if found:
         for i in range(len(found)):
             found[i] = quote(found[i].replace('\\\\', '\\'), safe='/')
