@@ -33,11 +33,13 @@ def main():
     for comment in subreddit.stream.comments():
         print(comment.body)
         if hasattr(comment,"body"):
+            replied=False
             for reply in comment.replies:
                 if hasattr(reply,"author"):
                     if reply.author == username:
+                        replied=True
                         break
-            else:
+            if replied==True:
                 if (hasattr(comment,"author")):
                     if (comment.author != username): process_comment(comment)
 
