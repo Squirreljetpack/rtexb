@@ -19,7 +19,7 @@ def main():
         user_agent=user_agent,
         client_id=client_id,
         client_secret=client_secret,
-        username=username
+        username=username,
         password=password,
     )
 
