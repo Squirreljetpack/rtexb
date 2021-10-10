@@ -30,12 +30,9 @@ def main():
     )
 
     subreddit = reddit.subreddit(subreddits)
-    for submission in subreddit.stream.submissions():
-        submission.comments.replace_more(limit=0)
-        comments = submission.comments.list()
-        for comment in comments:
-            if hasattr(comment,"body"):
-                process_comment(comment)
+    for comment in subreddit.stream.comments():
+        if hasattr(comment,"body"):
+            process_comment(comment)
 
 def process_comment(comment):
     for reply in comment.replies:
