@@ -55,7 +55,7 @@ def process_comment(comment):
                     print(comment.author)
                     print(comment.body)
                     print(s)
-                    print("###################")
+                    print("###################", flush=True)
                     time.sleep(120)
         
 
