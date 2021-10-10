@@ -31,24 +31,19 @@ def main():
 
     subreddit = reddit.subreddit(subreddits)
     for comment in subreddit.stream.comments():
-        print(comment.body)
         if hasattr(comment,"body"):
             replied=False
             comment.refresh()
             for reply in comment.replies:
                 if hasattr(reply,"author"):
-                    print(reply.author)
                     if reply.author == username:
                         break
             else:
-                print("hi", comment.body)
                 if (hasattr(comment,"author")):
-                    print("hi")
                     if (comment.author != username):
                         process_comment(comment)
 
 def process_comment(comment):
-    print("#"+comment.body)
     found = re.findall(re.compile(r"\$\$.*?\$\$"),comment.body)
     if found:
         for i in range(len(found)):
