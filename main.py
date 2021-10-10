@@ -34,14 +34,18 @@ def main():
         print(comment.body)
         if hasattr(comment,"body"):
             replied=False
+            comment.refresh()
             for reply in comment.replies:
                 if hasattr(reply,"author"):
+                    print(reply.author)
                     if reply.author == username:
-                        replied=True
                         break
-            if replied==True:
+            else:
+                print("hi", comment.body)
                 if (hasattr(comment,"author")):
-                    if (comment.author != username): process_comment(comment)
+                    print("hi")
+                    if (comment.author != username):
+                        process_comment(comment)
 
 def process_comment(comment):
     print("#"+comment.body)
