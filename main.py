@@ -48,7 +48,7 @@ def process_comment(comment):
                 found = re.findall(re.compile(r"\$\$.*?\$\$"),comment.body)
                 if found:
                     for i in range(len(found)):
-                        found[i] = quote(found[i].replace('\\', ''), safe='/')
+                        found[i] = quote(found[i].replace('\\\\', '\\'), safe='/')
                     l=[f"[{i}](http://{url}/mathjax/{s})" for i, s in enumerate(found, 1)]
                     s="I've rendered your latex: "+' '.join(l)
                     comment.reply(s)
