@@ -3,8 +3,11 @@ import praw
 from urllib.parse import quote
 import time
 from codecs import unicode_escape_decode
-import os
+import os, sys
 from dotenv import load_dotenv
+
+sys.stdout = open('out.log', 'w')
+sys.stderr = sys.stdout
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir,'.env'))
