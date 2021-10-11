@@ -49,7 +49,7 @@ def process_comment(comment):
         for i in range(len(found)):
             found[i] = quote(found[i].replace('\\\\', '\\'), safe='/')
         l=[f"[{i}](http://{url}/mathjax/{s})" for i, s in enumerate(found, 1)]
-        s="I've rendered your latex: "+' '.join(l)+'  \n ^(The website uses a self-signed cert as public certs are expensive, it is completely safe.)'
+        s="I've rendered your latex: "+' '.join(l)
         comment.reply(s)
         print(comment.author)
         print(comment.body)
